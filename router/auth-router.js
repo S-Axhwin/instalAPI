@@ -5,6 +5,7 @@ const User = require("../model/User")
 
 const router = express.Router();
 
+router.use(express.json())
 router.post("/reg", async(req, res)=>{
     const { username, password } = req.body;
     console.log(`hello ${username} with password ${password}`);
@@ -22,7 +23,7 @@ router.post("/login", async(req, res)=>{
     console.log("In login");
     console.log(username);
     const isExist = await User.findOne({username});
-    if(isExist){
+    if(isExist && username, password){
         const ExistPass = isExist?.password;
         console.log(ExistPass);
         const isPass = await bcrypt.compare(password, ExistPass, (err, found)=>{
