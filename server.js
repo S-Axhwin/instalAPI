@@ -11,13 +11,12 @@ app.use("/api/auth", authRouter);
 app.use("/api", postRouter);
 
 app.get("/api", (req, res)=>{
-    
     res.send("OK");
 })
 
 connection()
 .then(()=>{
-    const PORT = process.PORT || 5002;
+    const PORT = process.env.PORT || 5002;
     app.listen(PORT, ()=>console.log(`servers hosted at ${PORT}`));
 })
 
