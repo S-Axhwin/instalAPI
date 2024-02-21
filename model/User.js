@@ -8,6 +8,10 @@ const UserModel = {
     password: {
         type: String,
         required: true
+    },
+    profile: {
+        type: String,
+        required: true
     }
 }
 

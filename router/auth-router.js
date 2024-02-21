@@ -13,7 +13,7 @@ router.post("/reg", async(req, res)=>{
     if(isExist){
         res.json({status: false, reason: "User already exits"});
     }else{
-        User.create({username: username, password: await bcrypt.hash(password, 10)});
+        User.create({username: username, password: await bcrypt.hash(password, 10), profile: "none"});
         res.json({status: 200, reason: "User Created"});
     }
 })
@@ -41,6 +41,22 @@ router.post("/login", async(req, res)=>{
     }else{
         res.json({status: false, reason: "username is wrong"})
     }
+})
+
+router.post('/upload', async(req, res)=>{
+    console.log('in upload');
+    const { username, img } = req.body;
+    User.updateOne({username},{$push:{image: img},$currentDate: { lastUpdated: true }}, (err, val)=>{
+        console.log(val);
+        if(err){
+            console.log(err);
+            res.json({status: false})
+        }else{
+            res.json({status: true})
+        }
+    })
+    
+    
 })
 
 module.exports = router
