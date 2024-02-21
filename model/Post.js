@@ -9,10 +9,15 @@ const PostModel = {
         type: String,
         required: true
     },
+    image: {
+        type: String,
+        require: true
+    },
     date: {
         type: String,
         required: true
-    }
+    },
+
 }
 
 const Post = mongoose.model('Post', PostModel);

@@ -8,11 +8,11 @@ const router = express.Router();
 router.post('/newpost', async(req, res)=>{
     console.log('enter newpost');
     
-    const { username, blog } = req.body;
+    const { username, blog, image } = req.body;
     const isExist = await User.findOne({username});
     if (isExist){
         const curDate = new Date()
-        const newPost = await Post.create({post: blog, username, date: curDate.getDate()});
+        const newPost = await Post.create({post: blog, username, date: curDate.getDate(), image:image});
         console.log(newPost);
         res.send({status: true, reason: "posted new post"})
     }else{
